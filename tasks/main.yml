@@ -1,0 +1,20 @@
+---
+
+- name: Download KeeWeb x86_64 package for Debian OS family
+  get_url:
+    url: "https://github.com/keeweb/keeweb/releases/download/v{{keeweb_version}}/KeeWeb-{{keeweb_version}}.linux.x64.deb"
+    dest: /var/tmp/keeweb-x86_64.deb
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_architecture == 'x86_64'
+  tags:
+    - keeweb
+
+- name: Install KeeWeb x86_64 package for Debian OS family
+  apt:
+    deb: /var/tmp/keeweb-x86_64.deb
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_architecture == 'x86_64'
+  tags:
+    - keeweb
